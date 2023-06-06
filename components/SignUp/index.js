@@ -158,6 +158,15 @@ export default class signup extends Component {
 						<Text style={styles.text}>Register</Text>
 					</Pressable>
 				</View>
+				<View>
+					<Pressable
+						onPress={() => {
+							this.props.navigation.navigate("Login");
+						}}
+					>
+						<Text style={styles.text}>Alreay have an account ? SignIn</Text>
+					</Pressable>
+				</View>
 			</View>
 		);
 	}

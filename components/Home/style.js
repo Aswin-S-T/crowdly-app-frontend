@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 	txt: {
 		// backgroundColor: "black",
 		color: "#fff",
-		fontSize: 80,
+		fontSize: 20,
 	},
 });
 

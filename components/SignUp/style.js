@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		height: 40,
 		fontSize: 14,
+		
 		flex: 1,
 		borderColor: "blue",
 		borderRadius: 20,
