@@ -12,6 +12,7 @@ import Header from "../Components/Header";
 import SpinnerComponent from "../Components/SpinnerComponent";
 import Post from "../Components/Post";
 import { BACKEND_URL } from "../constants/api";
+import Card from "../Components/Card";
 
 const ProfileScreen = () => {
 	const [posts, setPost] = useState([]);
@@ -66,13 +67,14 @@ const ProfileScreen = () => {
 			</View>
 			<View style={styles.line} />
 			<View>
-				{loading ? (
+				{/* {loading ? (
 					<SpinnerComponent />
 				) : (
 					<View>
 						<Post posts={posts} />
 					</View>
-				)}
+				)} */}
+				<Card />
 			</View>
 		</ScrollView>
 	);
