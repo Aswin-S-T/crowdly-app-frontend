@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#1F45FC",
 		padding: 25,
+		top: 0,
+		position: "absolute",
 	},
 	text: {
 		color: "#fff",

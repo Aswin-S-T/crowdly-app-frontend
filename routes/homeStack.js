@@ -13,7 +13,7 @@ const screens = {
 	SignUpScreen: {
 		screen: SignUp,
 	},
-	HomeScreen: {
+	Crowdly: {
 		screen: Home,
 	},
 };
@@ -25,7 +25,7 @@ const homeStack = createStackNavigator(
 				backgroundColor: "white",
 				borderBottomColor: "white",
 			},
-			headerTintColor: "#fff",
+			headerTintColor: "blue",
 			headerTitleStyle: {
 				textAlign: "center",
 				fontWeight: "bold",
