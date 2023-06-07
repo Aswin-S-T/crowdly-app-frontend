@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
 	thumb: {
 		width: 40,
 		height: 40,
-		borderRadius: "50%",
+		borderRadius: 50,
 	},
 	postHeader: {
 		display: "flex",
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
 		fontWeight: 500,
 	},
 	followBtn: {
-		backgroundColor: "blue",
+		backgroundColor: "#00F3D2",
 		borderRadius: 10,
 	},
 	postImage: {

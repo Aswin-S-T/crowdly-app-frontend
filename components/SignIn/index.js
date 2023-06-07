@@ -15,6 +15,10 @@ import Feather from "react-native-vector-icons/Feather";
 const screenWidth = Dimensions.get("window").width;
 const screenHeight = Dimensions.get("window").height;
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 export default class signin extends Component {
 	constructor(props) {
 		super(props);
@@ -51,7 +55,8 @@ export default class signin extends Component {
 				body: JSON.stringify(Data),
 			})
 				.then((Response) => Response.json())
-				.then((Response) => {
+				.then(async (Response) => {
+					await AsyncStorage.setItem("isLoggedIn", "true");
 					this.props.navigation.navigate("HomeScreen");
 					console.log(Data);
 				})

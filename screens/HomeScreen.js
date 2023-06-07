@@ -18,14 +18,14 @@ import { BACKEND_URL } from "../constants/api";
 const HomeScreen = () => {
 	const screenWidth = Dimensions.get("window").width;
 	const [posts, setPost] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState("true");
 
 	useEffect(() => {
 		axios
 			.get(`${BACKEND_URL}/api/v1/user/all-post`)
 			.then((response) => {
 				setPost(response.data.data);
-				setLoading(false);
+				setLoading("false");
 			})
 			.catch((error) => {
 				console.error(error);
@@ -35,7 +35,7 @@ const HomeScreen = () => {
 	return (
 		<ScrollView>
 			<Header />
-			<View>
+			{/* <View>
 				{loading ? (
 					<SpinnerComponent />
 				) : (
@@ -43,6 +43,11 @@ const HomeScreen = () => {
 						<Post posts={posts} />
 					</View>
 				)}
+			</View> */}
+			<View>
+				<View>
+					<Post posts={posts} />
+				</View>
 			</View>
 		</ScrollView>
 	);

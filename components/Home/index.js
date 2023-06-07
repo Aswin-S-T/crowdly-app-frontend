@@ -19,7 +19,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
 					<Ionicons
 						name="md-home"
 						size={tabInfo.focused ? 26 : 20}
-						color={tabInfo.focused ? "blue" : tabInfo.tintColor}
+						color={tabInfo.focused ? "#00F3D2" : tabInfo.tintColor}
 					/>
 				),
 			},
@@ -32,7 +32,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
 					<Ionicons
 						name="person-add-outline"
 						size={tabInfo.focused ? 26 : 20}
-						color={tabInfo.focused ? "blue" : tabInfo.tintColor}
+						color={tabInfo.focused ? "#00F3D2" : tabInfo.tintColor}
 					/>
 				),
 			},
@@ -45,7 +45,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
 					<Ionicons
 						name="chatbox-outline"
 						size={tabInfo.focused ? 26 : 20}
-						color={tabInfo.focused ? "blue" : tabInfo.tintColor}
+						color={tabInfo.focused ? "#00F3D2" : tabInfo.tintColor}
 					/>
 				),
 			},
@@ -58,7 +58,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
 					<Ionicons
 						name="md-person-circle-outline"
 						size={tabInfo.focused ? 26 : 20}
-						color={tabInfo.focused ? "blue" : tabInfo.tintColor}
+						color={tabInfo.focused ? "#00F3D2" : tabInfo.tintColor}
 					/>
 				),
 			},
