@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 	},
 	followBtn: {
-		backgroundColor: "#1F45FC",
+		backgroundColor: "red",
 		color: "white",
 		padding: 5,
 		borderRadius: 5,
