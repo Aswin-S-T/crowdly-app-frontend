@@ -73,7 +73,6 @@ const ProfileScreen = () => {
 				</View>
 			</View>
 			<View>
-				<Text>Upload</Text>
 				<ImageUpload />
 			</View>
 			<View>
