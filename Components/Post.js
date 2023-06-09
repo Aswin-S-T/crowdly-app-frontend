@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Post = (posts) => {
 	const screenWidth = Dimensions.get("window").width;
-	console.log("POSTS---------------", posts);
+
 	return (
 		<View>
 			{posts.posts &&

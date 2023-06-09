@@ -18,6 +18,20 @@ import Card from "../Components/Card";
 
 const HomeScreen = () => {
 	const screenWidth = Dimensions.get("window").width;
+	const [posts, setPost] = useState([]);
+	const [loading, setLoading] = useState("true");
+
+	useEffect(() => {
+		axios
+			.get(`${BACKEND_URL}/api/v1/user/all-post`)
+			.then((response) => {
+				setPost(response.data.data);
+				setLoading("false");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}, []);
 
 	return (
 		<ScrollView>
@@ -33,7 +47,7 @@ const HomeScreen = () => {
 			</View> */}
 			<View style={{ backgroundColor: "#F0FBF9" }}>
 				<View>
-					<Card />
+					<Card posts={posts} />
 				</View>
 			</View>
 		</ScrollView>
