@@ -73,7 +73,7 @@ const ImageUpload = (props) => {
 							style={{ width: "100%", height: "100%" }}
 						/>
 					) : (
-						<Text style={styles.uploadBtn}>Upload Profile Image</Text>
+						<Text style={styles.uploadBtn}>+</Text>
 					)}
 				</TouchableOpacity>
 				<Text style={styles.skip}>Skip</Text>
@@ -100,20 +100,24 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	uploadBtnContainer: {
-		height: 125,
-		width: 125,
+		height: 50,
+		width: 50,
 		borderRadius: 125 / 2,
 		justifyContent: "center",
 		alignItems: "center",
-		borderStyle: "dashed",
+
 		borderWidth: 1,
 		overflow: "hidden",
+		backgroundColor: "blue",
+		color: "white",
+		fontSize: 25,
 	},
 	uploadBtn: {
 		textAlign: "center",
 		fontSize: 16,
 		opacity: 0.3,
 		fontWeight: "bold",
+		color: "white",
 	},
 	skip: {
 		textAlign: "center",
