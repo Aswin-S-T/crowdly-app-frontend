@@ -13,126 +13,66 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 
-const Card = () => {
+const Card = (posts) => {
 	const screenWidth = Dimensions.get("window").width;
+	console.log("POST--------------", posts ? posts : "NO POST");
 	return (
 		<View>
-			<View style={styles.card}>
-				<View style={styles.postHeader}>
-					<Image
-						style={styles.thumb}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-					<Text style={styles.username}>Username here</Text>
-					<Button title="Follow+" style={styles.followBtn} />
-				</View>
-				<View>
-					<Image
-						style={{ width: screenWidth, height: 300, padding: 10 }}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-				</View>
-				<View style={styles.postActions}>
-					<AntDesign name="heart" size={23} color="red" />
-					<FontAwesome5 name="comment-alt" size={23} color="black" />
-					<Fontisto name="favorite" size={24} color="black" />
-				</View>
-				<View style={{ padding: 10 }}>
-					<Text>0 Likes</Text>
-					<Text>View all 10 comments</Text>
-				</View>
-			</View>
-			<View style={styles.card}>
-				<View style={styles.postHeader}>
-					<Image
-						style={styles.thumb}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-					<Text style={styles.username}>Username here</Text>
-					<Button title="Follow+" style={styles.followBtn} />
-				</View>
-				<View>
-					<Image
-						style={{ width: screenWidth, height: 300, padding: 10 }}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-				</View>
-				<View style={styles.postActions}>
-					<AntDesign name="heart" size={23} color="red" />
-					<FontAwesome5 name="comment-alt" size={23} color="black" />
-					<Fontisto name="favorite" size={24} color="black" />
-				</View>
-				<View style={{ padding: 10 }}>
-					<Text>0 Likes</Text>
-					<Text>View all 10 comments</Text>
-				</View>
-			</View>
-			<View style={styles.card}>
-				<View style={styles.postHeader}>
-					<Image
-						style={styles.thumb}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-					<Text style={styles.username}>Username here</Text>
-					<Button title="Follow+" style={styles.followBtn} />
-				</View>
-				<View>
-					<Image
-						style={{ width: screenWidth, height: 300, padding: 10 }}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-				</View>
-				<View style={styles.postActions}>
-					<AntDesign name="heart" size={23} color="red" />
-					<FontAwesome5 name="comment-alt" size={23} color="black" />
-					<Fontisto name="favorite" size={24} color="black" />
-				</View>
-				<View style={{ padding: 10 }}>
-					<Text>0 Likes</Text>
-					<Text>View all 10 comments</Text>
-				</View>
-			</View>
-			<View style={styles.card}>
-				<View style={styles.postHeader}>
-					<Image
-						style={styles.thumb}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-					<Text style={styles.username}>Username here</Text>
-					<Button title="Follow+" style={styles.followBtn} />
-				</View>
-				<View>
-					<Image
-						style={{ width: screenWidth, height: 300, padding: 10 }}
-						source={{
-							uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-						}}
-					/>
-				</View>
-				<View style={styles.postActions}>
-					<AntDesign name="heart" size={23} color="red" />
-					<FontAwesome5 name="comment-alt" size={23} color="black" />
-					<Fontisto name="favorite" size={24} color="black" />
-				</View>
-				<View style={{ padding: 10 }}>
-					<Text>0 Likes</Text>
-					<Text>View all 10 comments</Text>
-				</View>
-			</View>
+			{posts.posts &&
+				posts.posts.length > 0 &&
+				posts.posts.map((post) => (
+					<View style={styles.card}>
+						<View style={styles.postHeader}>
+							<Image
+								style={styles.thumb}
+								source={{
+									uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
+								}}
+							/>
+							<Text style={styles.username}>Username here</Text>
+							<Button title="Follow+" style={styles.followBtn} />
+						</View>
+						<View style={styles.caption}>{post?.caption}</View>
+						<View>
+							<Image
+								style={{ width: screenWidth, height: 300, padding: 10 }}
+								source={{
+									uri: post.image,
+								}}
+							/>
+						</View>
+						<View style={styles.postActions}>
+							<Text style={{ left: 20, position: "relative" }}>
+								{post?.like?.length}
+							</Text>
+							<AntDesign
+								name="heart"
+								size={23}
+								style={{ marginLeft: 50 }}
+								color="red"
+							/>
+							<Text style={{ left: 20, position: "relative" }}>
+								{post?.comment?.length}
+							</Text>
+							<FontAwesome5
+								name="comment-alt"
+								style={{ marginLeft: 50 }}
+								size={23}
+								color="black"
+							/>
+							<Fontisto
+								name="favorite"
+								style={{ marginLeft: 40 }}
+								size={24}
+								color="black"
+							/>
+						</View>
+						<View style={{ padding: 10 }}>
+							<Text>0 Likes</Text>
+							<Text>View all 10 comments</Text>
+						</View>
+					</View>
+				))}
 		</View>
 	);
 };
@@ -140,6 +80,11 @@ const Card = () => {
 export default Card;
 
 const styles = StyleSheet.create({
+	caption: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	card: {
 		backgroundColor: "white",
 		marginTop: 10,
@@ -178,6 +123,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 15,
 		flexDirection: "row",
-		justifyContent: "space-between",
+		margin: 10,
 	},
 });
