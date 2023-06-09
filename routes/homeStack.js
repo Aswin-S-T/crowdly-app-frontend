@@ -34,7 +34,7 @@ const homeStack = createStackNavigator(
 			},
 		},
 	},
-	{ initialRouteName: "SignUpScreen" }
+	{ initialRouteName: "Crowdly" }
 );
 
 // const homeStack = createStackNavigator(
