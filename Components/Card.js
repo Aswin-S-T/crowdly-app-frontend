@@ -7,15 +7,21 @@ import {
 	Dimensions,
 	ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
+import Modal from "react-native-modal";
 
 const Card = (posts) => {
 	const screenWidth = Dimensions.get("window").width;
 	console.log("POST--------------", posts ? posts : "NO POST");
+	const [isModalVisible, setModalVisible] = useState(false);
+
+	const toggleModal = () => {
+		setModalVisible(!isModalVisible);
+	};
 	return (
 		<View>
 			{posts.posts &&
@@ -68,9 +74,27 @@ const Card = (posts) => {
 							/>
 						</View>
 						<View style={{ padding: 10 }}>
-							<Text>0 Likes</Text>
-							<Text>View all 10 comments</Text>
+							<Text>{post?.like?.length} Likes</Text>
+							<Text onPress={toggleModal}>View all 10 comments</Text>
 						</View>
+						<Modal isVisible={isModalVisible}>
+							<View style={styles.model}>
+								<Text style={{ fontSize: 20 }}>All Comments</Text>
+								{post && post.comment && post.comment.length > 0 ? (
+									post.comment.map((comment) => (
+										<View>
+											<Text>{comment.username}</Text>
+											<Text>{comment.comment}</Text>
+										</View>
+									))
+								) : (
+									<Text>No comments available</Text>
+								)}
+								<Text style={styles.close} onPress={toggleModal}>
+									X
+								</Text>
+							</View>
+						</Modal>
 					</View>
 				))}
 		</View>
@@ -80,6 +104,16 @@ const Card = (posts) => {
 export default Card;
 
 const styles = StyleSheet.create({
+	close: {
+		display: "flex",
+		justifyContent: "flex-end",
+	},
+	model: {
+		height: 400,
+		backgroundColor: "white",
+		flex: 1,
+		padding: 10,
+	},
 	caption: {
 		display: "flex",
 		justifyContent: "center",
