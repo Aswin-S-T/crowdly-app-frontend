@@ -7,12 +7,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 
 const screens = {
-	Login: {
-		screen: SignIn,
-	},
-	SignUpScreen: {
-		screen: SignUp,
-	},
+	// Login: {
+	// 	screen: SignIn,
+	// },
+	// SignUpScreen: {
+	// 	screen: SignUp,
+	// },
 	Crowdly: {
 		screen: Home,
 	},
@@ -34,7 +34,7 @@ const homeStack = createStackNavigator(
 			},
 		},
 	},
-	{ initialRouteName: "Login" }
+	{ initialRouteName: "Crowdly" }
 );
 
 // const homeStack = createStackNavigator(
