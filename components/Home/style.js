@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
 		color: "#fff",
 		fontSize: 20,
 	},
+	pluscircle:{
+		backgroundColor:"blue",
+		color:"white"
+	}
 });
 
 export default styles;
