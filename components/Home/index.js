@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
-import styles from "./style";
+import { View, Text ,StyleSheet} from "react-native";
+// import styles from "./style";
 import { Ionicons } from "@expo/vector-icons";
 import { createAppContainer } from "react-navigation";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
@@ -8,6 +8,11 @@ import HomeScreen from "../../screens/HomeScreen";
 import UserScreen from "../../screens/UserScreen";
 import ChatScreen from "../../screens/ChatScreen";
 import ProfileScreen from "../../screens/ProfileScreen";
+import ImageUpload from "../../Components/ImageUpload";
+import { AntDesign } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons'; 
+
+
 
 const TabNavigator = createMaterialBottomTabNavigator(
 	{
@@ -29,11 +34,22 @@ const TabNavigator = createMaterialBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: "User",
 				tabBarIcon: (tabInfo) => (
+					
 					<Ionicons
 						name="person-add-outline"
 						size={tabInfo.focused ? 26 : 20}
 						color={tabInfo.focused ? "#1F45FC" : tabInfo.tintColor}
 					/>
+				),
+			},
+		},
+		Upload: {
+			screen: ImageUpload,
+			navigationOptions: {
+				tabBarLabel: "Add",
+				tabBarIcon: (tabInfo) => (
+					<Entypo name="circle-with-plus" style={styles.plusBtn} size={tabInfo.focused ? 26 : 20}
+					color={tabInfo.focused ? "#1F45FC" : tabInfo.tintColor}/>
 				),
 			},
 		},
@@ -79,3 +95,23 @@ export default function Home() {
 		</Navigator>
 	);
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: "blue",
+		padding: 4,
+	},
+	text: {
+		color: "white",
+		fontSize: 18,
+		fontSize: 25,
+		fontWeight: "bold",
+	},
+	plusBtn:{
+		fontSize:50,
+		color:"blue",
+		top:-22,
+		position:"relative"
+	}
+});
