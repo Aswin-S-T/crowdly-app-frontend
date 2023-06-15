@@ -44,7 +44,7 @@ const Post = (posts) => {
 							/>
 						</View>
 						<View style={styles.postActions}>
-							{post.like.length} Likes
+							{/* {post.like.length} Likes */}
 							<Ionicons style={styles.icons} name="heart-outline" />
 							<Ionicons style={styles.icons} name="chatbubble-outline" />
 						</View>
