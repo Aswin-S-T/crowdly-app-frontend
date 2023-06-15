@@ -8,18 +8,11 @@ import {
   Dimensions,
   ScrollView,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
 
-function Story() {
+const OnlineUsers = () => {
   return (
     <ScrollView horizontal={true}>
       <View style={styles.storyBox}>
-        <Feather
-          name="plus-circle"
-          size={29}
-          style={styles.addStory}
-          color="black"
-        />
         <Image
           style={styles.thumb}
           source={{
@@ -131,35 +124,23 @@ function Story() {
       </View>
     </ScrollView>
   );
-}
+};
 
-export default Story;
+export default OnlineUsers;
 
 const styles = StyleSheet.create({
-  addStory: {
-    // marginTop: 30,
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-    width: 60,
-    height: 80,
-    margin: 8,
-    borderWidth: 2,
-    borderColor: "#FE2E9A",
-  },
   storyBox: {
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "#FBFBFB",
+    backgroundColor: "#FDFFFD",
+    padding: 10,
   },
   thumb: {
-    height: 80,
-    width: 60,
-    borderRadius: 10,
-    margin: 8,
+    height: 50,
+    width: 50,
+    borderRadius: 50,
+    margin: 4,
     borderWidth: 2,
-    borderColor: "#FE2E9A",
+    borderColor: "#2DFF10",
   },
 });

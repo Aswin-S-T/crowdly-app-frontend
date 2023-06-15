@@ -18,7 +18,6 @@ import { AVATAR_IMAGE } from "../constants/images";
 
 const Card = (posts) => {
   const screenWidth = Dimensions.get("window").width;
-  console.log("POST-----------------", posts ? posts : "NO POSTS");
 
   const [isModalVisible, setModalVisible] = useState(false);
 
