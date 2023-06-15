@@ -48,7 +48,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
           <Entypo
             name="circle-with-plus"
             style={styles.plusBtn}
-            size={tabInfo.focused ? 26 : 20}
+            size={tabInfo.focused ? 30 : 30}
             color={tabInfo.focused ? "#FE2E9A" : tabInfo.tintColor}
           />
         ),
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   plusBtn: {
-    fontSize: 50,
+    // fontSize: 35,
     color: "#FE2E9A",
-    top: -22,
-    position: "relative",
+    // top: 0,
+    // position: "relative",
   },
 });

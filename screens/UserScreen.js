@@ -8,6 +8,8 @@ import {
   StatusBar,
   Image,
   Button,
+  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -16,6 +18,13 @@ import { BACKEND_URL } from "../constants/api";
 const UserScreen = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [search, setSearch] = useState("");
+
+  const onChangeText = (inputText) => {
+    setSearch(inputText);
+  };
+
   useEffect(() => {
     setLoading(true);
     axios
@@ -34,6 +43,12 @@ const UserScreen = () => {
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={search}
+          placeholder="Enter name ..."
+        />
         {loading ? (
           <Text>Loading....</Text>
         ) : (
@@ -46,7 +61,10 @@ const UserScreen = () => {
                 }}
               />
               <Text>{user?.username}</Text>
-              <Button title="Follow+" onPress={sendFollow} />
+              {/* <Button title="Follow+" onPress={sendFollow} /> */}
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color: "white" }}>Follow+</Text>
+              </TouchableOpacity>
             </View>
           ))
         )}
@@ -57,6 +75,15 @@ const UserScreen = () => {
 
 export default UserScreen;
 const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 20,
+  },
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
@@ -98,5 +125,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     padding: 15,
+  },
+  button: {
+    backgroundColor: "#FE2E9A",
+    padding: 10,
+    borderRadius: 5,
+    color: "white",
   },
 });

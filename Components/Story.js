@@ -11,7 +11,7 @@ import {
 function Story() {
   return (
     <ScrollView horizontal={true}>
-      <div style={styles.storyBox}>
+      <View style={styles.storyBox}>
         <Image
           style={styles.thumb}
           source={{
@@ -120,7 +120,7 @@ function Story() {
             uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
           }}
         />
-      </div>
+      </View>
     </ScrollView>
   );
 }

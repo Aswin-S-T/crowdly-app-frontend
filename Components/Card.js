@@ -18,18 +18,20 @@ import { AVATAR_IMAGE } from "../constants/images";
 
 const Card = (posts) => {
   const screenWidth = Dimensions.get("window").width;
+  console.log("POST-----------------", posts ? posts : "NO POSTS");
 
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
   return (
     <View>
       {posts.posts &&
         posts.posts.length > 0 &&
         posts.posts.map((post) => (
-          <View style={styles.card}>
+          <View style={styles.card} key={post.id}>
             <View style={styles.postHeader}>
               <Image
                 style={styles.thumb}
@@ -41,9 +43,10 @@ const Card = (posts) => {
               <TouchableOpacity style={styles.button}>
                 <Text style={{ color: "white" }}>Follow+</Text>
               </TouchableOpacity>
-              {/* <Button title="Follow+" style={styles.followBtn} /> */}
             </View>
-            <View style={styles.caption}>{post?.caption}</View>
+            <View style={styles.caption}>
+              <Text>{post?.caption}</Text>
+            </View>
             <View>
               <Image
                 style={{ width: screenWidth, height: 300, padding: 10 }}
@@ -53,30 +56,24 @@ const Card = (posts) => {
               />
             </View>
             <View style={styles.postActions}>
-              <Text style={{ left: 20, position: "relative" }}>
-                {/* {post?.like?.length} */}
+              <Text style={{ left: 10, position: "relative" }}>
+                {post?.like?.length}
               </Text>
               <AntDesign
                 name="heart"
-                size={23}
+                size={26}
                 style={{ marginLeft: 10 }}
                 color="red"
               />
               <Text style={{ left: 20, position: "relative" }}>
-                {/* {post?.comment?.length} */}
+                {post?.comment?.length}
               </Text>
               <FontAwesome5
                 name="comment-alt"
-                style={{ marginLeft: 20 }}
-                size={23}
+                style={{ marginLeft: 26 }}
+                size={26}
                 color="black"
               />
-              {/* <Fontisto
-								name="favorite"
-								// style={{ marginLeft: 40 }}
-								size={24}
-								color="black"
-							/> */}
             </View>
             <View style={{ padding: 10 }}>
               <Text>{post?.like?.length} Likes</Text>
@@ -84,12 +81,9 @@ const Card = (posts) => {
             </View>
             <Modal isVisible={isModalVisible}>
               <View style={styles.model}>
-                <Text style={{ fontSize: 20, color: "#FE2E9A" }}>
-                  All Comments
-                </Text>
                 {post && post.comment && post.comment.length > 0 ? (
                   post.comment.map((comment) => (
-                    <View style={styles.commentList}>
+                    <View style={styles.commentList} key={comment.id}>
                       <View style={styles.sameRow}>
                         <Image
                           style={styles.thumb}
@@ -101,7 +95,7 @@ const Card = (posts) => {
                           style={{
                             marginTop: 9,
                             fontSize: 15,
-                            fontWeight: 500,
+                            fontWeight: "500",
                             marginLeft: 10,
                           }}
                         >
@@ -145,7 +139,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     fontSize: 20,
-    // float:"right"
   },
   model: {
     height: 400,
@@ -174,8 +167,9 @@ const styles = StyleSheet.create({
   },
   username: {
     color: "#111",
-    fontSize: 15,
-    marginTop: 5,
+    fontSize: 16,
+    marginTop: 7,
+    fontWeight: 500,
   },
   followBtn: {
     backgroundColor: "red",
