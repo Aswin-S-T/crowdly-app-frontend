@@ -1,11 +1,12 @@
 import {
-	View,
-	Text,
-	Image,
-	StyleSheet,
-	Button,
-	Dimensions,
-	ScrollView,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Button,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -13,16 +14,17 @@ import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import Modal from "react-native-modal";
+import { AVATAR_IMAGE } from "../constants/images";
 
 const Card = (posts) => {
-	const screenWidth = Dimensions.get("window").width;
-	console.log("POST--------------", posts ? posts : "NO POST");
-	const [isModalVisible, setModalVisible] = useState(false);
+  const screenWidth = Dimensions.get("window").width;
 
-	const toggleModal = () => {
-		setModalVisible(!isModalVisible);
-	};
-	return (
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+  return (
     <View>
       {posts.posts &&
         posts.posts.length > 0 &&
@@ -36,7 +38,10 @@ const Card = (posts) => {
                 }}
               />
               <Text style={styles.username}>{post?.username}</Text>
-              <Button title="Follow+" style={styles.followBtn} />
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color: "white" }}>Follow+</Text>
+              </TouchableOpacity>
+              {/* <Button title="Follow+" style={styles.followBtn} /> */}
             </View>
             <View style={styles.caption}>{post?.caption}</View>
             <View>
@@ -79,12 +84,33 @@ const Card = (posts) => {
             </View>
             <Modal isVisible={isModalVisible}>
               <View style={styles.model}>
-                <Text style={{ fontSize: 20 }}>All Comments</Text>
+                <Text style={{ fontSize: 20, color: "#FE2E9A" }}>
+                  All Comments
+                </Text>
                 {post && post.comment && post.comment.length > 0 ? (
                   post.comment.map((comment) => (
                     <View style={styles.commentList}>
-                      <Text>{comment.username}</Text>
-                      <Text>{comment.comment}</Text>
+                      <View style={styles.sameRow}>
+                        <Image
+                          style={styles.thumb}
+                          source={{
+                            uri: AVATAR_IMAGE,
+                          }}
+                        />
+                        <Text
+                          style={{
+                            marginTop: 9,
+                            fontSize: 15,
+                            fontWeight: 500,
+                            marginLeft: 10,
+                          }}
+                        >
+                          {comment.username}
+                        </Text>
+                      </View>
+                      <Text style={{ marginLeft: 50, fontSize: 17 }}>
+                        {comment.comment}
+                      </Text>
                     </View>
                   ))
                 ) : (
@@ -104,69 +130,79 @@ const Card = (posts) => {
 export default Card;
 
 const styles = StyleSheet.create({
-	commentList:{
-		display:'flex',
-		marginTop:20
-	},
-	close: {
-		display: "flex",
-		justifyContent: "flex-end",
-		top:5,
-		position:'absolute',
-		right:10,
-		fontSize:20
-		// float:"right"
-	},
-	model: {
-		height: 400,
-		backgroundColor: "white",
-		flex: 1,
-		padding: 10,
-	},
-	caption: {
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	card: {
-		backgroundColor: "white",
-		marginTop: 10,
-	},
-	container: {
-		flex: 1,
-		backgroundColor: "white",
-		padding: 15,
-	},
-	thumb: {
-		height: 40,
-		width: 40,
-		borderRadius: 50,
-	},
-	username: {
-		color: "#111",
-		fontSize: 15,
-		marginTop: 5,
-	},
-	followBtn: {
-		backgroundColor: "red",
-		color: "white",
-		padding: 5,
-		borderRadius: 5,
-		width: 50,
-	},
-	postHeader: {
-		display: "flex",
-		flex: 1,
-		padding: 10,
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
-	postActions: {
-		display: "flex",
-		flex: 1,
-		padding: 15,
-		flexDirection: "row",
-		justifyContent:"flex-start",
-		margin: 10,
-	},
+  sameRow: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  commentList: {
+    display: "flex",
+    marginTop: 20,
+  },
+  close: {
+    display: "flex",
+    justifyContent: "flex-end",
+    top: 5,
+    position: "absolute",
+    right: 10,
+    fontSize: 20,
+    // float:"right"
+  },
+  model: {
+    height: 400,
+    backgroundColor: "white",
+    flex: 1,
+    padding: 10,
+  },
+  caption: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card: {
+    backgroundColor: "white",
+    marginTop: 10,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    padding: 15,
+  },
+  thumb: {
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+  },
+  username: {
+    color: "#111",
+    fontSize: 15,
+    marginTop: 5,
+  },
+  followBtn: {
+    backgroundColor: "red",
+    color: "white",
+    padding: 5,
+    borderRadius: 5,
+    width: 50,
+  },
+  postHeader: {
+    display: "flex",
+    flex: 1,
+    padding: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  postActions: {
+    display: "flex",
+    flex: 1,
+    padding: 15,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    margin: 10,
+  },
+  button: {
+    backgroundColor: "#FE2E9A",
+    padding: 10,
+    borderRadius: 5,
+    color: "white",
+  },
 });
