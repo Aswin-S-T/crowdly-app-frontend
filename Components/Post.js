@@ -12,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Post = (posts) => {
 	const screenWidth = Dimensions.get("window").width;
-	console.log("POSTS---------------", posts);
+
 	return (
 		<View>
 			{posts.posts &&
@@ -44,7 +44,7 @@ const Post = (posts) => {
 							/>
 						</View>
 						<View style={styles.postActions}>
-							{post.like.length} Likes
+							{/* {post.like.length} Likes */}
 							<Ionicons style={styles.icons} name="heart-outline" />
 							<Ionicons style={styles.icons} name="chatbubble-outline" />
 						</View>

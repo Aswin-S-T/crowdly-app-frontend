@@ -57,7 +57,8 @@ export default class signin extends Component {
 				.then((Response) => Response.json())
 				.then(async (Response) => {
 					await AsyncStorage.setItem("isLoggedIn", "true");
-					this.props.navigation.navigate("HomeScreen");
+					await AsyncStorage.setItem("user", JSON.stringify(Response.data));
+					this.props.navigation.navigate("Crowdly");
 					console.log(Data);
 				})
 				.catch((error) => {

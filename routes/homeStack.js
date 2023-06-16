@@ -7,53 +7,64 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 
 const screens = {
-	// Login: {
-	// 	screen: SignIn,
-	// },
-	// SignUpScreen: {
-	// 	screen: SignUp,
-	// },
-	HomeScreen: {
-		screen: Home,
-	},
+  Login: {
+    screen: SignIn,
+  },
+  SignUpScreen: {
+    screen: SignUp,
+  },
+  Crowdly: {
+    screen: Home,
+  },
 };
-// const homeStack = createStackNavigator(
-// 	screens,
-// 	{
-// 		defaultNavigationOptions: {
+const homeStack = createStackNavigator(
+  screens,
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: "white",
+        borderBottomColor: "white",
+        padding: 25,
+      },
+      headerTintColor: "#FE2E9A",
+      headerTitleStyle: {
+        display: "flex",
+        justifyContent: "flex-start",
+        fontWeight: "bold",
+        marginTop: 20,
+        fontSize: 25,
+      },
+    },
+  },
+  { initialRouteName: "Crowdly" }
+);
 
-// 			// headerStyle: {
-// 			// 	backgroundColor: "red",
-// 			// 	borderBottomColor: "white",
-// 			// },
-// 			// headerTintColor: "#fff",
-// 			// headerTitleStyle: {
-// 			// 	textAlign: "center",
-// 			// 	fontWeight: "bold",
-// 			// 	marginTop: 20,
-// 			// 	fontSize: 20,
-// 			// },
+// const homeStack = createStackNavigator(
+// 	{
+// 		HomeScreen: {
+// 			screen: Home,
+// 			navigationOptions: {
+// 				// Custom options specific to Home screen
+// 				headerShown: false,
+// 			},
+// 		},
+// 		Login: {
+// 			screen: SignIn,
+// 			navigationOptions: {
+// 				// Custom options specific to Home screen
+// 				headerShown: false,
+// 			},
 // 		},
 // 	},
-// 	{ initialRouteName: "SignUpScreen" }
+// 	{ initialRouteName: "SignIn" }
 // );
 
-const homeStack = createStackNavigator({
-	HomeScreen: {
-		screen: Home,
-		navigationOptions: {
-			// Custom options specific to Home screen
-			headerShown: false,
-		},
-	},
+AsyncStorage.getItem("isLoggedIn").then((isLoggedIn) => {
+  console.log("LOGEDIN-------------------------", isLoggedIn == "true");
+  const initialRouteNames = isLoggedIn == "true" ? "HomeScreen" : "Login";
+  homeStack.initialRouteName = {
+    initialRouteNames,
+  };
 });
-
-// AsyncStorage.getItem("isLoggedIn").then((isLoggedIn) => {
-// 	console.log("LOGEDIN-------------------------", isLoggedIn == "true");
-// 	const initialRouteNames = isLoggedIn == "true" ? "HomeScreen" : "Login";
-// 	homeStack.initialRouteName = {
-// 		initialRouteNames,
-// 	};
-// });
 
 export default createAppContainer(homeStack);
