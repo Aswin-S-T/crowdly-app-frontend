@@ -8,18 +8,58 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import Modal from "react-native-modal";
 import { AVATAR_IMAGE } from "../constants/images";
+import Spinner from "./Spinner";
 
 const Card = (posts) => {
   const screenWidth = Dimensions.get("window").width;
 
   const [isModalVisible, setModalVisible] = useState(false);
+
+ 
+
+  let formatedPostData = [];
+  const formatedPost = () => {
+    const postData = posts.posts ? posts.posts : [];
+    let dataObj = {};
+
+    for (let i = 0; i < postData.length; i++) {
+      let e = postData[i];
+      var inputDate = new Date(e.time);
+
+      var currentDate = new Date();
+
+      var timeDiff = currentDate - inputDate;
+
+      var hoursDiff = Math.floor(timeDiff / (1000 * 60 * 60));
+      var minutesDiff = Math.floor((timeDiff / (1000 * 60)) % 60);
+      var daysDiff = Math.floor(hoursDiff / 24);
+
+      if (daysDiff > 0) {
+        e.time = `${daysDiff} days`;
+      } else if (hoursDiff < 1) {
+        e.time = `${minutesDiff} minutes`;
+      } else if (daysDiff > 31) {
+        e.time = Math.floor(daysDiff / 31) + " months";
+      }
+      formatedPostData.push(e);
+    }
+  };
+  formatedPost();
+
+  console.log('FORMATED POSTS-------------', formatedPostData ? formatedPostData : 'no data')
+
+  useEffect(()=>{
+    if (posts && posts.posts && posts.posts.length > 0) {
+      let postData =  posts.posts
+    }
+  },[])
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -27,9 +67,14 @@ const Card = (posts) => {
 
   return (
     <View>
-      {posts.posts &&
-        posts.posts.length > 0 &&
-        posts.posts.map((post) => (
+      {formatedPostData == 0 && (
+        <>
+          <Spinner />
+        </>
+      )}
+      {formatedPostData &&
+        formatedPostData.length > 0 &&
+        formatedPostData.map((post) => (
           <View style={styles.card} key={post.id}>
             <View style={styles.postHeader}>
               <Image
@@ -39,6 +84,7 @@ const Card = (posts) => {
                 }}
               />
               <Text style={styles.username}>{post?.username}</Text>
+              <Text style={styles.time}>{post?.time} ago</Text>
               <TouchableOpacity style={styles.button}>
                 <Text style={{ color: "white" }}>Follow+</Text>
               </TouchableOpacity>
@@ -123,6 +169,11 @@ const Card = (posts) => {
 export default Card;
 
 const styles = StyleSheet.create({
+  time:{
+    fontSize:12,
+    color:'gray',
+    marginTop:7
+  },
   sameRow: {
     display: "flex",
     flexDirection: "row",

@@ -59,7 +59,7 @@ export default class signin extends Component {
 					await AsyncStorage.setItem("isLoggedIn", "true");
 					await AsyncStorage.setItem("user", JSON.stringify(Response.data));
 					this.props.navigation.navigate("Crowdly");
-					console.log(Data);
+					console.log('RESPONSE--------------', Response ? Response?.data?._id : 'no response');
 				})
 				.catch((error) => {
 					console.error("ERROR FOUND" + error);
