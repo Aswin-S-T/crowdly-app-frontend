@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { StackActions } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import axios from "axios";
 import { BACKEND_URL } from "../constants/api";
+import SweetAlert from "react-native-sweet-alert";
 
 const ImageUpload = (props) => {
   const [profileImage, setProfileImage] = useState("");
   const [progress, setProgress] = useState(0);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      AsyncStorage.getItem("user").then((userData) => {
+        if (userData) {
+          setCurrentUser(JSON.parse(userData));
+        }
+      });
+    };
+    fetchUser();
+  }, []);
 
   const openImageLibrary = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -38,7 +53,7 @@ const ImageUpload = (props) => {
     });
 
     let dataToSend = {
-      userId: "12345678",
+      userId: currentUser?._id,
       data: profileImage,
       imageType: "feed",
       caption: "testcaption",
@@ -46,13 +61,24 @@ const ImageUpload = (props) => {
     };
 
     try {
+      setLoading(true);
       let res = await fetch(`${BACKEND_URL}/api/v1/user/add-post`, {
         method: "POST",
         body: JSON.stringify(dataToSend),
         headers: { "Content-Type": "application/json" },
       });
 
-      if (res.data.success) {
+      if (res.status == 200) {
+        setLoading(false);
+        SweetAlert.showAlertWithOptions({
+          title: "Success",
+          subTitle: "Your post added",
+          confirmButtonTitle: "OK",
+          confirmButtonColor: "#007AFF",
+          onConfirm: () => {
+            console.log("OK pressed");
+          },
+        });
         props.navigation.dispatch(StackActions.replace("UserProfile"));
       }
     } catch (error) {
@@ -85,7 +111,7 @@ const ImageUpload = (props) => {
               { backgroundColor: "green", color: "white", borderRadius: 8 },
             ]}
           >
-            Upload
+            {loading ? <>Uploading....</> : <>Upload</>}
           </Text>
         ) : null}
       </View>
