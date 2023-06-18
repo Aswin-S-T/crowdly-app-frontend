@@ -12,15 +12,18 @@ import { Feather } from "@expo/vector-icons";
 import AddStory from "./AddStory";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/api";
+import Lightbox from "react-native-lightbox";
 
 function Story() {
   const [stories, setStories] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [selected, setSelected] = useState(false);
+
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/api/v1/user/get-story`)
       .then((response) => {
-        console.log("STORIES============", response?.data?.data);
         setStories(response.data.data);
         setLoading("false");
       })
@@ -28,6 +31,10 @@ function Story() {
         console.error(error);
       });
   }, []);
+
+  const handleImageClick = () => {
+    setSelected(true);
+  };
 
   return (
     <ScrollView horizontal={true}>
@@ -42,12 +49,15 @@ function Story() {
         {stories &&
           stories.length > 0 &&
           stories.map((story) => (
-            <Image
-              style={styles.thumb}
-              source={{
-                uri: story?.story,
-              }}
-            />
+            <Lightbox>
+              <Image
+                onPress={handleImageClick}
+                style={[styles.thumb, selected && styles.fullwidth]}
+                source={{
+                  uri: story?.story,
+                }}
+              />
+            </Lightbox>
           ))}
       </View>
     </ScrollView>
@@ -82,5 +92,8 @@ const styles = StyleSheet.create({
     margin: 8,
     borderWidth: 2,
     borderColor: "#FE2E9A",
+  },
+  fullwidth: {
+    width: "100%",
   },
 });
