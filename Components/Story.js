@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,125 +9,56 @@ import {
   ScrollView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import AddStory from "./AddStory";
+import axios from "axios";
+import { BACKEND_URL } from "../constants/api";
+import Lightbox from "react-native-lightbox";
 
 function Story() {
+  const [stories, setStories] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/api/v1/user/get-story`)
+      .then((response) => {
+        setStories(response.data.data);
+        setLoading("false");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleImageClick = () => {
+    setSelected(true);
+  };
+
   return (
     <ScrollView horizontal={true}>
       <View style={styles.storyBox}>
-        <Feather
+        {/* <Feather
           name="plus-circle"
           size={29}
           style={styles.addStory}
           color="black"
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
-        <Image
-          style={styles.thumb}
-          source={{
-            uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1JORCag4QA5k8Hk3T4qVNZHNpnJPG5xg6InmPYyvuajMleITpa_eX-YG_Lw2PiEyG0qs&usqp=CAU",
-          }}
-        />
+        /> */}
+        <AddStory />
+        {stories &&
+          stories.length > 0 &&
+          stories.map((story) => (
+            <Lightbox>
+              <Image
+                onPress={handleImageClick}
+                style={[styles.thumb, selected && styles.fullwidth]}
+                source={{
+                  uri: story?.story,
+                }}
+              />
+            </Lightbox>
+          ))}
       </View>
     </ScrollView>
   );
@@ -161,5 +92,8 @@ const styles = StyleSheet.create({
     margin: 8,
     borderWidth: 2,
     borderColor: "#FE2E9A",
+  },
+  fullwidth: {
+    width: "100%",
   },
 });
