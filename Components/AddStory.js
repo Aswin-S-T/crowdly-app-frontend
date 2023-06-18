@@ -3,16 +3,15 @@ import { View, StyleSheet, TouchableOpacity, Text, Image } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { StackActions } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { Feather } from "@expo/vector-icons";
 import axios from "axios";
 import { BACKEND_URL } from "../constants/api";
-import SweetAlert from "react-native-sweet-alert";
 
-const ImageUpload = (props) => {
-  const [profileImage, setProfileImage] = useState("");
-  const [progress, setProgress] = useState(0);
+const AddStory = () => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [story, setStory] = useState("");
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -39,30 +38,23 @@ const ImageUpload = (props) => {
       });
 
       if (!response.cancelled) {
-        setProfileImage(response.uri);
+        setStory(response.uri);
       }
     }
   };
 
   const uploadProfileImage = async () => {
     const formData = new FormData();
-    formData.append("profile", {
-      name: new Date() + "_profile",
-      data: profileImage,
-      type: "image/jpg",
-    });
 
     let dataToSend = {
       userId: currentUser?._id,
-      data: profileImage,
-      imageType: "feed",
-      caption: "testcaption",
-      about: "test abour",
+      data: story,
+      username: currentUser?.username,
     };
 
     try {
       setLoading(true);
-      let res = await fetch(`${BACKEND_URL}/api/v1/user/add-post`, {
+      let res = await fetch(`${BACKEND_URL}/api/v1/user/upload-story`, {
         method: "POST",
         body: JSON.stringify(dataToSend),
         headers: { "Content-Type": "application/json" },
@@ -70,6 +62,7 @@ const ImageUpload = (props) => {
 
       if (res.status == 200) {
         setLoading(false);
+        setSuccess(true);
         SweetAlert.showAlertWithOptions({
           title: "Success",
           subTitle: "Your post added",
@@ -85,7 +78,6 @@ const ImageUpload = (props) => {
       console.log(error.message);
     }
   };
-
   return (
     <View style={styles.container}>
       <View>
@@ -93,25 +85,49 @@ const ImageUpload = (props) => {
           onPress={openImageLibrary}
           style={styles.uploadBtnContainer}
         >
-          {profileImage ? (
+          {story ? (
             <Image
-              source={{ uri: profileImage }}
+              source={{ uri: story }}
               style={{ width: "100%", height: "100%" }}
             />
           ) : (
-            <Text style={styles.uploadBtn}>Upload Image</Text>
+            // <Text style={styles.uploadBtn}>Upload Image</Text>
+            <Feather
+              name="plus-circle"
+              size={29}
+              style={styles.addStory}
+              color="black"
+            />
           )}
         </TouchableOpacity>
-        <Text style={styles.skip}>Skip</Text>
-        {profileImage ? (
+
+        {story ? (
           <Text
             onPress={uploadProfileImage}
             style={[
               styles.skip,
-              { backgroundColor: "green", color: "white", borderRadius: 8 },
+              {
+                backgroundColor: "grey",
+                color: "white",
+                borderRadius: 8,
+                padding: 5,
+              },
             ]}
           >
-            {loading ? <>Uploading....</> : <>Upload</>}
+            {loading ? (
+              <>Uploading....</>
+            ) : !success ? (
+              <>Upload</>
+            ) : (
+              <>
+                <Feather
+                  name="plus-circle"
+                  size={29}
+                  style={styles.addStory}
+                  color="black"
+                />
+              </>
+            )}
           </Text>
         ) : null}
       </View>
@@ -119,38 +135,34 @@ const ImageUpload = (props) => {
   );
 };
 
+export default AddStory;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  addStory: {
+    // marginTop: 30,
+    display: "flex",
     justifyContent: "center",
+    alignContent: "center",
     alignItems: "center",
-  },
-  uploadBtnContainer: {
-    padding: 8,
     borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
-    backgroundColor: "#FE2E9A",
-    color: "white",
-    fontSize: 25,
+    width: 60,
+    height: 80,
+    margin: 8,
+    borderWidth: 2,
+    borderColor: "#FE2E9A",
+    backgroundColor: "transparent",
   },
-  uploadBtn: {
-    textAlign: "center",
-    fontSize: 16,
-    opacity: 0.3,
-    fontWeight: "bold",
-    color: "white",
+  storyBox: {
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "#FBFBFB",
   },
-  skip: {
-    textAlign: "center",
-    padding: 10,
-    fontSize: 16,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    letterSpacing: 2,
-    opacity: 0.5,
+  thumb: {
+    height: 80,
+    width: 60,
+    borderRadius: 10,
+    margin: 8,
+    borderWidth: 2,
+    borderColor: "#FE2E9A",
   },
 });
-
-export default ImageUpload;
