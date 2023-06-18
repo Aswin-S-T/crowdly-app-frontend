@@ -22,8 +22,6 @@ const Card = (posts) => {
 
   const [isModalVisible, setModalVisible] = useState(false);
 
- 
-
   let formatedPostData = [];
   const formatedPost = () => {
     const postData = posts.posts ? posts.posts : [];
@@ -53,13 +51,11 @@ const Card = (posts) => {
   };
   formatedPost();
 
-  console.log('FORMATED POSTS-------------', formatedPostData ? formatedPostData : 'no data')
-
-  useEffect(()=>{
+  useEffect(() => {
     if (posts && posts.posts && posts.posts.length > 0) {
-      let postData =  posts.posts
+      let postData = posts.posts;
     }
-  },[])
+  }, []);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -90,7 +86,8 @@ const Card = (posts) => {
               </TouchableOpacity>
             </View>
             <View style={styles.caption}>
-              <Text>{post?.caption}</Text>
+              {/* <Text>{post?.caption}</Text> */}
+              <Text style={styles.captionText}>{post?.caption}</Text>
             </View>
             <View>
               <Image
@@ -169,10 +166,10 @@ const Card = (posts) => {
 export default Card;
 
 const styles = StyleSheet.create({
-  time:{
-    fontSize:12,
-    color:'gray',
-    marginTop:7
+  time: {
+    fontSize: 12,
+    color: "gray",
+    marginTop: 7,
   },
   sameRow: {
     display: "flex",
@@ -198,8 +195,14 @@ const styles = StyleSheet.create({
   },
   caption: {
     display: "flex",
-    justifyContent: "center",
+    flexDirection: "flex-start",
     alignItems: "center",
+  },
+  captionText: {
+    fontSize: 15,
+    color: "#111",
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   card: {
     backgroundColor: "white",
